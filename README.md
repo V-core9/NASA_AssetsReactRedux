@@ -1,3 +1,21 @@
+# Nasa Assets Listing
+
+## Pages List
+
+1. Search / Homepage
+Starting page where you can search for assets.
+    '/'
+
+2. Show specific item page
+Basically this a show post by id page. Uses Nasa Ids to search for collection and show first result.
+    '/post/:id'
+
+3. Counter Example from CRA
+This is just an example counter that gets created when you use create-react-app with redux template.
+    '/counter'
+
+___
+
 # Getting Started with Create React App and Redux
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
