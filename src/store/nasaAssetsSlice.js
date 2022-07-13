@@ -4,8 +4,8 @@ const initialState = {
   collection: {},
   status: 'idle',
   search: {
-    q: 'space station',
-    yearStart: 1900,
+    q: '',
+    yearStart: 1,
     yearEnd: (new Date()).getFullYear(),
     page: 1,
     media_type: null
@@ -21,7 +21,10 @@ export const startSearch = createAsyncThunk(
 
     const medType = (media_type == null) ? `` : `&media_type=${media_type}`;
 
-    const resp = await fetch(`https://images-api.nasa.gov/search?q=${q}${medType}&year_start=${yearStart}&year_end=${yearEnd}&page=${page}`, { method: 'GET', redirect: 'follow' });
+    const yStart = (yearStart == null) ? `` : `&year_start=${yearStart}`;
+    const yEnd = (yearEnd == null) ? `` : `&year_end=${yearEnd}`;
+
+    const resp = await fetch(`https://images-api.nasa.gov/search?q=${q}${medType}${yStart}${yEnd}&page=${page}`, { method: 'GET', redirect: 'follow' });
     console.log(resp.body);
     return resp.text();
   }
@@ -40,9 +43,15 @@ export const nasaAssetsSlice = createSlice({
       const value = Number(action.payload);
       if (Number.isInteger(value) && value <= (new Date()).getFullYear() && value >= state.search.yearStart) state.search.yearEnd = value;
     },
+    resetYearEnd: (state) => {
+      state.search.yearEnd = (new Date()).getFullYear();
+    },
     setYearStart: (state, action) => {
       const value = Number(action.payload);
       if (Number.isInteger(value) && value > 0 && value <= state.search.yearEnd) state.search.yearStart = value;
+    },
+    resetYearStart: (state) => {
+      state.search.yearStart = 1;
     },
     nextPage: (state) => {
       state.search.page += 1;
@@ -82,7 +91,7 @@ export const nasaAssetsSlice = createSlice({
   },
 });
 
-export const { setSearchQ, setYearEnd, setYearStart } = nasaAssetsSlice.actions;
+export const { setSearchQ, setYearEnd, setYearStart, resetYearStart, resetYearEnd } = nasaAssetsSlice.actions;
 
 export const selectSearch = (state) => state.nasaAssets.search;
 
