@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSearchQ, setYearEnd, setYearStart, startNewSearch, resetYearStart, resetYearEnd } from '../../store/nasaAssetsSlice';
+import { setSearchQ, setYearEnd, setYearStart, startNewSearch, resetYearStart, resetYearEnd, toggleImageMediaType, toggleVideoMediaType, toggleAudioMediaType, } from '../../store/nasaAssetsSlice';
 
 
 function SearchListFiler() {
@@ -35,6 +35,13 @@ function SearchListFiler() {
                 </heading>
                 {
                     advancedFiltersStatus && <content >
+
+                        <form_group>
+                            <label for="media_type">Media Type</label>
+                            <action onClick={(e) => dispatch(toggleAudioMediaType())} className={(search.media_type.indexOf('audio') !== -1) ? 'greenAction' : ''}>Audio</action>
+                            <action onClick={(e) => dispatch(toggleVideoMediaType())} className={(search.media_type.indexOf('video') !== -1) ? 'greenAction' : ''}>Video</action>
+                            <action onClick={(e) => dispatch(toggleImageMediaType())} className={(search.media_type.indexOf('image') !== -1) ? 'greenAction' : ''}>Image</action>
+                        </form_group>
 
                         <form_group>
                             <label for="search_q">Start Year</label>

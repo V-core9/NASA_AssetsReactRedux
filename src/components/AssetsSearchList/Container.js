@@ -33,9 +33,9 @@ function AssetsSearchListContainer() {
         <searchlist>
             <SearchListFilter />
             <results>
-                {status === 'idle' && collection.items?.map(item => <SearchListItem data={item} />)}
                 {status === 'loading' && <p>➰ Loading...</p>}
                 {status === 'error' && <p>🔻 Error: Your IP might get banned for loading too much data in short period of time if you navigate many pages in short time.</p>}
+                {collection.items?.map(item => <SearchListItem data={item} />)}
             </results>
             <SearchListPagination />
         </searchlist>

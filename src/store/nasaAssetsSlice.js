@@ -8,7 +8,7 @@ const initialState = {
     yearStart: 1,
     yearEnd: (new Date()).getFullYear(),
     page: 1,
-    media_type: null
+    media_type: []
   },
 };
 
@@ -19,7 +19,12 @@ export const startSearch = createAsyncThunk(
 
     const { q, yearStart, yearEnd, page, media_type } = data;
 
-    const medType = (media_type == null) ? `` : `&media_type=${media_type}`;
+    let medType = ``;
+    if (media_type.length > 0) {
+      medType = `&media_type=${media_type[0]}`;
+      if (media_type[1] !== undefined) medType += `,${media_type[1]}`;
+      if (media_type[2] !== undefined) medType += `,${media_type[2]}`;
+    }
 
     const yStart = (yearStart == null) ? `` : `&year_start=${yearStart}`;
     const yEnd = (yearEnd == null) ? `` : `&year_end=${yearEnd}`;
@@ -54,7 +59,8 @@ export const nasaAssetsSlice = createSlice({
       state.search.yearStart = 1;
     },
     nextPage: (state) => {
-      state.search.page += 1;
+      const total = state.collection.metadata.total_hits;
+      if (((total / 100) - state.search.page) > 1) state.search.page += 1;
     },
     prevPage: (state) => {
       if (state.search.page > 1) state.search.page -= 1;
@@ -64,6 +70,30 @@ export const nasaAssetsSlice = createSlice({
     },
     setPage: (state, action) => {
       state.search.page = parseInt(action.payload);
+    },
+    toggleImageMediaType: (state) => {
+      const position = state.search.media_type.indexOf('image');
+      if (position === -1) {
+        state.search.media_type.push('image');
+      } else {
+        state.search.media_type.splice(position, 1);
+      }
+    },
+    toggleVideoMediaType: (state) => {
+      const position = state.search.media_type.indexOf('video');
+      if (position === -1) {
+        state.search.media_type.push('video');
+      } else {
+        state.search.media_type.splice(position, 1);
+      }
+    },
+    toggleAudioMediaType: (state) => {
+      const position = state.search.media_type.indexOf('audio');
+      if (position === -1) {
+        state.search.media_type.push('audio');
+      } else {
+        state.search.media_type.splice(position, 1);
+      }
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -91,7 +121,7 @@ export const nasaAssetsSlice = createSlice({
   },
 });
 
-export const { setSearchQ, setYearEnd, setYearStart, resetYearStart, resetYearEnd } = nasaAssetsSlice.actions;
+export const { setSearchQ, setYearEnd, setYearStart, resetYearStart, resetYearEnd, toggleImageMediaType, toggleVideoMediaType, toggleAudioMediaType, } = nasaAssetsSlice.actions;
 
 export const selectSearch = (state) => state.nasaAssets.search;
 
