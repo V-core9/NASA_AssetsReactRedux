@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setSearchQ, setYearEnd, setYearStart, startNewSearch } from '../../store/nasaImagesSlice';
+import { setSearchQ, setYearEnd, setYearStart, startNewSearch } from '../../store/nasaAssetsSlice';
 
 
 function SearchListFiler() {
     const dispatch = useDispatch();
-    const { collection, status, search } = useSelector(x => x.nasaImages);
+    const { collection, status, search } = useSelector(x => x.nasaAssets);
 
     let totalPages = Math.ceil((collection?.metadata?.total_hits || 0) / 100);
 

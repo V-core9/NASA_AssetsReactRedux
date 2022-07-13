@@ -11,5 +11,9 @@ test('renders Home Text', () => {
     </Provider>
   );
 
-  expect(getByText(/Home/i)).toBeInTheDocument();
+  expect(getByText(/🔍 Search/i)).toBeInTheDocument();
+  expect(getByText(/🔄 Counter/i)).toBeInTheDocument();
+
+
+  expect(getByText(/Search Form/i)).toBeInTheDocument();
 });

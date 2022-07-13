@@ -7,25 +7,29 @@ const initialState = {
     q: 'space station',
     yearStart: 1900,
     yearEnd: (new Date()).getFullYear(),
-    page: 1
+    page: 1,
+    media_type: null
   },
 };
 
 
 export const startSearch = createAsyncThunk(
-  'nasaImages/startSearch',
+  'nasaAssets/startSearch',
   async (data) => {
 
-    const { q, yearStart, yearEnd, page } = data;
-    const resp = await fetch(`https://images-api.nasa.gov/search?q=${q}&media_type=image&year_start=${yearStart}&year_end=${yearEnd}&page=${page}`, { method: 'GET', redirect: 'follow' });
+    const { q, yearStart, yearEnd, page, media_type } = data;
+
+    const medType = (media_type == null) ? `` : `&media_type=${media_type}`;
+
+    const resp = await fetch(`https://images-api.nasa.gov/search?q=${q}${medType}&year_start=${yearStart}&year_end=${yearEnd}&page=${page}`, { method: 'GET', redirect: 'follow' });
     console.log(resp.body);
     return resp.text();
   }
 );
 
 
-export const nasaImagesSlice = createSlice({
-  name: 'nasaImages',
+export const nasaAssetsSlice = createSlice({
+  name: 'nasaAssets',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -78,28 +82,28 @@ export const nasaImagesSlice = createSlice({
   },
 });
 
-export const { setSearchQ, setYearEnd, setYearStart } = nasaImagesSlice.actions;
+export const { setSearchQ, setYearEnd, setYearStart } = nasaAssetsSlice.actions;
 
-export const selectSearch = (state) => state.nasaImages.search;
+export const selectSearch = (state) => state.nasaAssets.search;
 
 export const goToPage = (val) => (dispatch, getState) => {
-  dispatch(nasaImagesSlice.actions.setPage(val));
+  dispatch(nasaAssetsSlice.actions.setPage(val));
   dispatch(startSearch(selectSearch(getState())));
 };
 
 export const goToNextPage = () => (dispatch, getState) => {
-  dispatch(nasaImagesSlice.actions.nextPage());
+  dispatch(nasaAssetsSlice.actions.nextPage());
   dispatch(startSearch(selectSearch(getState())));
 };
 
 export const goToPrevPage = () => (dispatch, getState) => {
-  dispatch(nasaImagesSlice.actions.prevPage());
+  dispatch(nasaAssetsSlice.actions.prevPage());
   dispatch(startSearch(selectSearch(getState())));
 };
 
 export const startNewSearch = () => (dispatch, getState) => {
-  dispatch(nasaImagesSlice.actions.resetPage());
+  dispatch(nasaAssetsSlice.actions.resetPage());
   dispatch(startSearch(selectSearch(getState())));
 };
 
-export default nasaImagesSlice.reducer;
+export default nasaAssetsSlice.reducer;
