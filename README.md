@@ -25,8 +25,8 @@ A page to view a single asset...image/audio/video.
 # Short Info
 
 - Well I've obviously used CRA with Redux template.  
-- Did not bother much with actual CSS so it's a mess that works haha :D
-- Added few tests to show Redux store slice settings change. Not actually fetching any data in tests yet.
+- Did not bother much with actual CSS so it's a mess that works for now, thinking of actually expanding this since I've ended up reading and listening to bunch of Nasa Assets. Then will set up a proper structure for it. haha :D
+- Added few tests to show testing of Redux store slice. Tests are not actually fetching any data yet.
 - Created V2 of Search that incudes additional parameters:
   - Media Type - Image/Audio/Video
   - Title
