@@ -22,6 +22,17 @@ This example includes all media types and a list of filters you can use.
 A page to view a single asset...image/audio/video.
     '/asset/:nasa_id'
 
+# Short Info
+
+- Well I've obviously used CRA with Redux template.  
+- Did not bother much with actual CSS so it's a mess that works haha :D
+- Added few tests to show Redux store slice settings change. Not actually fetching any data in tests yet.
+- Created V2 of Search that incudes additional parameters:
+  - Media Type - Image/Audio/Video
+  - Title
+  - Description
+  - Location
+
 ___
 
 # Getting Started with Create React App and Redux
