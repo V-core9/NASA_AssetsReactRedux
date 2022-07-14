@@ -445,3 +445,8 @@ article>info section {
   background: #00000040;
   padding: 1em;
 }
+
+
+img {
+  width: 100%;
+}

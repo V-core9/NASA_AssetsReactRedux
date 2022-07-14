@@ -3,7 +3,7 @@
 ## Pages List
 
 1. Search / Homepage
-Starting page where you can search for assets.
+Basic Search Page that only lists images using search query string, start and end year.
     '/'
 
 2. Show specific item page
@@ -13,6 +13,14 @@ Basically this a show post by id page. Uses Nasa Ids to search for collection an
 3. Counter Example from CRA
 This is just an example counter that gets created when you use create-react-app with redux template.
     '/counter'
+
+4. V2 Search Example
+This example includes all media types and a list of filters you can use.
+    '/search'
+
+4. V2 Single Asset View Example
+A page to view a single asset...image/audio/video.
+    '/asset/:nasa_id'
 
 ___
 

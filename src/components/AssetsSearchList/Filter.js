@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSearchQ, setYearEnd, setYearStart, startNewSearch, resetYearStart, resetYearEnd, toggleImageMediaType, toggleVideoMediaType, toggleAudioMediaType, } from '../../store/nasaAssetsSlice';
+import { setSearchQ, setYearEnd, setYearStart, startNewSearch, resetYearStart, resetYearEnd, toggleImageMediaType, toggleVideoMediaType, toggleAudioMediaType, setTitle, setDescription, setLocation } from '../../store/nasaAssetsSlice';
 
 
 function SearchListFiler() {
@@ -44,13 +44,31 @@ function SearchListFiler() {
                         </form_group>
 
                         <form_group>
-                            <label for="search_q">Start Year</label>
+                            <label >Title</label>
+                            <input type="text" value={search.title} onChange={(e) => dispatch(setTitle(e.target.value))} />
+                            <action className={`${(search.title !== '') ? 'visible' : 'hidden'} inputReset`} onClick={(e) => dispatch(setTitle(''))} title="Reset Input Field.">🔄</action>
+                        </form_group>
+
+                        <form_group>
+                            <label >Description</label>
+                            <input type="text" value={search.description} onChange={(e) => dispatch(setDescription(e.target.value))} />
+                            <action className={`${(search.description !== '') ? 'visible' : 'hidden'} inputReset`} onClick={(e) => dispatch(setDescription(''))} title="Reset Input Field.">🔄</action>
+                        </form_group>
+
+                        <form_group>
+                            <label >Location</label>
+                            <input type="text" value={search.location} onChange={(e) => dispatch(setLocation(e.target.value))} />
+                            <action className={`${(search.location !== '') ? 'visible' : 'hidden'} inputReset`} onClick={(e) => dispatch(setLocation(''))} title="Reset Input Field.">🔄</action>
+                        </form_group>
+
+                        <form_group>
+                            <label >Start Year</label>
                             <input type="number" value={search.yearStart} onChange={(e) => dispatch(setYearStart(e.target.value))} />
                             <action className={`${(search.yearStart !== 1) ? 'visible' : 'hidden'} inputReset`} onClick={(e) => dispatch(resetYearStart())} title="Reset Input Field.">🔄</action>
                         </form_group>
 
                         <form_group>
-                            <label for="search_q">End Year</label>
+                            <label >End Year</label>
                             <input type="number" value={search.yearEnd} onChange={(e) => dispatch(setYearEnd(e.target.value))} />
                             <action className={`${(search.yearEnd !== (new Date()).getFullYear()) ? 'visible' : 'hidden'} inputReset`} onClick={(e) => dispatch(resetYearEnd())} title="Reset Input Field.">🔄</action>
                         </form_group>

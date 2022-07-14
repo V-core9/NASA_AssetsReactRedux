@@ -7,6 +7,9 @@ const initialState = {
     q: '',
     yearStart: 1,
     yearEnd: (new Date()).getFullYear(),
+    title: '',
+    description: '',
+    location: '',
     page: 1,
     media_type: []
   },
@@ -17,7 +20,7 @@ export const startSearch = createAsyncThunk(
   'nasaAssets/startSearch',
   async (data) => {
 
-    const { q, yearStart, yearEnd, page, media_type } = data;
+    const { q, yearStart, yearEnd, page, media_type, title, description, location } = data;
 
     let medType = ``;
     if (media_type.length > 0) {
@@ -29,7 +32,11 @@ export const startSearch = createAsyncThunk(
     const yStart = (yearStart == null) ? `` : `&year_start=${yearStart}`;
     const yEnd = (yearEnd == null) ? `` : `&year_end=${yearEnd}`;
 
-    const resp = await fetch(`https://images-api.nasa.gov/search?q=${q}${medType}${yStart}${yEnd}&page=${page}`, { method: 'GET', redirect: 'follow' });
+    const reqTitle = (title === '') ? `` : `&title=${title}`;
+    const reqDescription = (description === '') ? `` : `&title=${description}`;
+    const reqLocation = (location === '') ? `` : `&location=${location}`;
+
+    const resp = await fetch(`https://images-api.nasa.gov/search?q=${q}${medType}${yStart}${yEnd}${reqTitle}${reqDescription}${reqLocation}&page=${page}`, { method: 'GET', redirect: 'follow' });
     console.log(resp.body);
     return resp.text();
   }
@@ -94,6 +101,30 @@ export const nasaAssetsSlice = createSlice({
       } else {
         state.search.media_type.splice(position, 1);
       }
+    },
+    setTitle: (state, action) => {
+      try {
+        let val = String(action.payload);
+        if (typeof val === 'string') state.search.title = val;
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    setDescription: (state, action) => {
+      try {
+        let val = String(action.payload);
+        if (typeof val === 'string') state.search.description = val;
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    setLocation: (state, action) => {
+      try {
+        let val = String(action.payload);
+        if (typeof val === 'string') state.search.location = val;
+      } catch (e) {
+        console.log(e);
+      }
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -121,7 +152,7 @@ export const nasaAssetsSlice = createSlice({
   },
 });
 
-export const { setSearchQ, setYearEnd, setYearStart, resetYearStart, resetYearEnd, toggleImageMediaType, toggleVideoMediaType, toggleAudioMediaType, } = nasaAssetsSlice.actions;
+export const { setSearchQ, setYearEnd, setYearStart, resetYearStart, resetYearEnd, toggleImageMediaType, toggleVideoMediaType, toggleAudioMediaType, setTitle, setDescription, setLocation } = nasaAssetsSlice.actions;
 
 export const selectSearch = (state) => state.nasaAssets.search;
 
