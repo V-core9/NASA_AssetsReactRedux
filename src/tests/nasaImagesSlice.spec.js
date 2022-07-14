@@ -1,4 +1,4 @@
-import nasaImagesReducer, { searchImages, setSearchQ, setYearEnd, setYearStart, nextPage, prevPage, resetPage, setPage } from '../store/nasaImagesSlice';
+import nasaImagesReducer, { setSearchQ, setYearEnd, setYearStart } from '../store/nasaImagesSlice';
 
 describe('nasaImages reducer', () => {
   const initialState = {
@@ -8,7 +8,7 @@ describe('nasaImages reducer', () => {
       page: 1,
       q: "space station",
       yearEnd: 2022,
-      yearStart: 1900,
+      yearStart: 1900
     }
   };
   it('should handle initial state', () => {

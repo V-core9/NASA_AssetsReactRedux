@@ -1,8 +1,8 @@
-import SearchListContainer from '../components/SearchList/Container';
+import AssetsSearchListContainer from '../components/AssetsSearchList/Container';
 
 function SearchPage() {
     return (
-        <SearchListContainer />
+        <AssetsSearchListContainer />
     )
 
 };

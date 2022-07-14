@@ -12,7 +12,7 @@ function SearchListFiler() {
 
     const submittinForm = (e) => {
         e.preventDefault();
-        dispatch(startNewSearch(search));
+        dispatch(startNewSearch());
     };
 
     return (

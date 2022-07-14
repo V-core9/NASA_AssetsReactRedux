@@ -3,7 +3,7 @@
 ## Pages List
 
 1. Search / Homepage
-Starting page where you can search for assets.
+Basic Search Page that only lists images using search query string, start and end year.
     '/'
 
 2. Show specific item page
@@ -13,6 +13,25 @@ Basically this a show post by id page. Uses Nasa Ids to search for collection an
 3. Counter Example from CRA
 This is just an example counter that gets created when you use create-react-app with redux template.
     '/counter'
+
+4. V2 Search Example
+This example includes all media types and a list of filters you can use.
+    '/search'
+
+4. V2 Single Asset View Example
+A page to view a single asset...image/audio/video.
+    '/asset/:nasa_id'
+
+# Short Info
+
+- Well I've obviously used CRA with Redux template.  
+- Did not bother much with actual CSS so it's a mess that works for now, thinking of actually expanding this since I've ended up reading and listening to bunch of Nasa Assets. Then will set up a proper structure for it. haha :D
+- Added few tests to show testing of Redux store slice. Tests are not actually fetching any data yet.
+- Created V2 of Search that incudes additional parameters:
+  - Media Type - Image/Audio/Video
+  - Title
+  - Description
+  - Location
 
 ___
 

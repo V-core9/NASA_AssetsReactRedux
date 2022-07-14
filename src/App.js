@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import PostPage from './pages/PostPage';
 import CounterPage from './pages/CounterPage';
 import SearchPage from './pages/SearchPage';
+import AssetViewPage from './pages/AssetViewPage';
 
 import NavBar from './components/NavBar';
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/post/:id" element={<PostPage />} />
         <Route path="/counter" element={<CounterPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/asset/:nasa_id" element={<AssetViewPage />} />
       </Routes>
     </BrowserRouter>
   );
