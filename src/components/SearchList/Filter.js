@@ -4,7 +4,7 @@ import { setSearchQ, setYearEnd, setYearStart, startNewSearch } from '../../stor
 
 function SearchListFiler() {
     const dispatch = useDispatch();
-    const { collection, status, search } = useSelector(x => x.nasaImages);
+    const { collection, search } = useSelector(x => x.nasaImages);
 
     let totalPages = Math.ceil((collection?.metadata?.total_hits || 0) / 100);
 
