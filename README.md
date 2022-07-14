@@ -33,6 +33,10 @@ A page to view a single asset...image/audio/video.
   - Description
   - Location
 
+- Search Pagination only goes to page 100 since that is the nasa limit.
+- Though optional some params may require entry (all have a reset button so it's obvious they just get reset to default if not already).
+- /asset/:nasa_id - page will also find and fetch appropriate asset for video and audio. While Image will just be a preview one.
+
 ___
 
 # Getting Started with Create React App and Redux
