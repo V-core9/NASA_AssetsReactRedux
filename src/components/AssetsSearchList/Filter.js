@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchQ, setYearEnd, setYearStart, startNewSearch, resetYearStart, resetYearEnd, toggleImageMediaType, toggleVideoMediaType, toggleAudioMediaType, setTitle, setDescription, setLocation } from '../../store/nasaAssetsSlice';
 
 
 function SearchListFiler() {
     const dispatch = useDispatch();
-    const { collection, status, search } = useSelector(x => x.nasaAssets);
+    const { collection, search } = useSelector(x => x.nasaAssets);
 
     const [advancedFiltersStatus, setAdvancedFiltersStatus] = useState(false);
 

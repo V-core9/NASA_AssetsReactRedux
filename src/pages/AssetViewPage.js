@@ -32,7 +32,7 @@ function AssetViewPage() {
     const isVideo = info.media_type === 'video';
 
     if (data !== {}) {
-        if (isAudio && audioSrc == '') {
+        if (isAudio && audioSrc === '') {
             console.log('getting AUDIO data');
 
             fetch(data.collection.items[0].href, requestOptions)
@@ -40,18 +40,17 @@ function AssetViewPage() {
                 .then(result => setAudioSrc(JSON.parse(result)[0]))
                 .catch(error => console.log('error', error));
         }
-        if (isVideo && videoSrc == '') {
+        if (isVideo && videoSrc === '') {
             console.log('getting VIDEO data');
 
             fetch(data.collection.items[0].href, requestOptions)
                 .then(response => response.text())
                 .then(result => {
                     let rez = JSON.parse(result);
-                    rez.map(item => {
+                    rez.forEach(item => {
                         const parseHelper = item.split('.');
                         const fileExtension = parseHelper[parseHelper.length - 1];
                         if (fileExtension === 'mp4') setVideoSrc(item);
-                        return;
                     });
                 })
                 .catch(error => console.log('error', error));
@@ -70,14 +69,14 @@ function AssetViewPage() {
                 <gallery>
                     {isImage && <img src={data.collection?.items[0].links[0].href} alt={info.title} />}
                     {
-                        audioSrc != '' &&
+                        audioSrc !== '' &&
                         <audio controls>
                             <source src={audioSrc} type="audio/mp3" />
                             Your browser does not support the audio element.
                         </audio>
                     }
                     {
-                        videoSrc != '' &&
+                        videoSrc !== '' &&
                         <video controls>
                             <source src={videoSrc} type="video/mp4" />
                             Your browser does not support the video tag.
